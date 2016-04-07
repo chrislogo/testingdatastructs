@@ -1,0 +1,45 @@
+MyDS
+The data structure that I have chosen to design is a prefix trie. It begins as
+a pointer called root, which is a Node that is empty and points to an array of 26 children
+that are all initially set to NULL by the constructors. The push function contains a for 
+loop that traverses through the trie depending on what index is. The index is
+found by incrementing character by character through the string and
+subtracting that character's ascii value by the ascii value of 'a' = 97. Since
+all of the words inserted will be lower case then depending of the result of
+the subtraction, the index will be a number 0 (meaning the character was 'a')
+to 25 (meaning the character was 'z'). When an index is met, that index
+becomes a parent to 26 new Node children so that you find the next letter of a
+word by going down to the next level in the trie. The search function works in
+the same way as the insert for traversing the tree and if the index found is
+pointing to NULL before the word length is reached then that word does not
+exist in the trie. Then finally the destructors free up the memory.
+
+
+MyHash
+My hash function takes in a string and then tries to map it to a unique
+integer. I tried to make the number as unique as possible by setting it the
+first character in the string and then xoring the bits with 370261 (a large
+prime number) and then multiplying that by 101 and right shifting the bits and
+adding the next character in the string to make more of a combination
+of bits. Then when every character is incremented into the hash value, I
+perform an and operation with 370261 and again multiply by 101 and add a right
+shift to the bits.
+
+
+Analysis
+On average, MyHash and MyDS are able to store the dictionary in about half the
+time it takes for set and unordered_set's original hash function to do so.
+These results only occur with large dictionaries however; when using smaller
+dictionaries like the words file from Project4, MyHash is the fastest at
+storing the dictionary with unordered-set's hash closely behind.
+After running mulitple times, the searching times for both MyHash and MyDS
+are on average faster than both set and unordered_set. The min time for MyDS
+is often the fastest. I believe this is a result to the fact that if it is
+searching for a really short word in the dictionary, it does not have to
+search far to find all of the characters. On average MyDS also has the fastest
+max time taken to search for a word with MyHash coming in second. As for the
+mean time, Hash, MyHash, and MyDS tend to have the fastest times. For smaller
+dictionaries, MyDS had the fastest times in all aspects (aside from the
+storing time) and MyHash in second and having the fastest storing time. The set was often 
+the slowest data structure in all timing aspects as well as having the slowest max 
+time and longest storing time.
